@@ -40,8 +40,9 @@ $(function() {
         it('ensures all URLs and Names are not empty', function() {
             for (var i = 0, len = allFeeds.length; i < len; i++) {
                 expect(allFeeds[i].url).toContain('http');
+                expect(allFeeds[i].url).toBeDefined();
                 expect(allFeeds[i].url).not.toBe(null);
-                expect(allFeeds[i].name).toBeTruthy();
+                expect(allFeeds[i].name).toBeDefined();
                 expect(allFeeds[i].name).not.toBe(null);
                 expect(allFeeds[i].name).toContain('');
                 expect(allFeeds[i]).toBeTruthy();
@@ -63,6 +64,7 @@ $(function() {
          */
          it('ensures menu element is hidden', function() {
             expect(document.getElementsByClassName("menu-hidden")).toBeTruthy();
+            expect($('body').hasClass('menu-hidden')).toBe(true);
          });
 
          /* TODO: Write a test that ensures the menu changes
@@ -84,10 +86,7 @@ $(function() {
     describe("Initial Entries", function() {
 
         beforeEach(function(done) {
-            setTimeout(function() {
-
-                done();
-            }, 1);
+            loadFeed(0, done)
         });
 
 
@@ -100,13 +99,13 @@ $(function() {
 
 
          it("ensures .entry element in .feed container after asynch load", function() {
-             //expect($('.feed').hasClass($('.entry-link .entry')[0])).toBe(true);
-             //expect($('.feed .entry-link .entry').length).toBeGreaterThan(0);
+             //expect($('.feed').hasClass($('.entry'))).toBe(true);
+             expect($('.feed .entry-link .entry').length).toBeGreaterThan(0);
              expect($('.feed').length).toBe(1);
-             //expect($('.entry').length).toBe(4);
-
+             expect($('.feed').find('.entry').length).toBeGreaterThan(0);
+             expect($('.feed .entry').length).toBeGreaterThan(0);
+             expect($('.entry').length).toBeGreaterThan(0);
          });
-        
     });
 
 
@@ -119,30 +118,37 @@ $(function() {
          */
 
         describe("New Feed Selection", function() {
-            function loadfeed() {};
+            var firstFeed;
+            var secondFeed;
+            var thirdFeed;
+            var fourthFeed;
+
             beforeEach(function(done) {
-            var one = document.getElementsByClassName("entry-link")[0];
-            var two = document.getElementsByClassName("entry-link")[1];
-            var three = document.getElementsByClassName("entry-link")[2];
-            var four = document.getElementsByClassName("entry-link")[3];
-                loadfeed(0);
-                loadfeed(1);
-                done();
-             
+                loadFeed(0, function() {
+                    firstFeed = $('.entry').find("h2")[0].innerText;
+                });
+                loadFeed(1, function() {
+                    secondFeed = $('.entry').find("h2")[0].innerText;
+                    done();
+                });
+                loadFeed(2, function() {
+                    thirdFeed = $('.entry').find("h2")[0].innerText;
+                });
+                loadFeed(3, function() {
+                    fourthFeed = $('.entry').find("h2")[0].innerText;
+                })
          });
 
          it("ensures content changes", function() {
-            var one = document.getElementsByClassName("entry-link")[0];
-            var two = document.getElementsByClassName("entry-link")[1];
-            var three = document.getElementsByClassName("entry-link")[2];
-            var four = document.getElementsByClassName("entry-link")[3];
-            // var first = document.getElementsByClassName("feed a:nth-child(1)")
-            // var firstText = $('.feed a:nth-child(1)')[0];
-            // var secondText = $('.feed a:nth-child(2)')[0];
-            // expect(firstText).not.toMatch(secondText);
-            
-            expect(one).not.toMatch(two);
-            // expect(document.getElementsByClassName("entry-link")[0]).not.toMatch(document.getElementsByClassName("entry-link")[1]);
+            expect(firstFeed).not.toEqual(secondFeed);
+            expect(secondFeed).not.toEqual(thirdFeed);
+            expect(secondFeed).not.toEqual(fourthFeed);
+            expect(firstFeed).not.toEqual(fourthFeed);
          });
+
+         afterAll(function(done) {
+            loadFeed(0, done);
+         });
+
             }); 
 }());
