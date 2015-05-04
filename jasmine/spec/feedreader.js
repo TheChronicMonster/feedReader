@@ -10,6 +10,7 @@
  * to ensure they don't run until the DOM is ready.
  */
 $(function() {
+    "use strict";
     /* This is our first test suite - a test suite just contains
     * a related set of tests. This suite is all about the RSS
     * feeds definitions, the allFeeds variable in our application.
@@ -25,7 +26,6 @@ $(function() {
          */
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).not.toBe(0);
             expect(allFeeds.length).toBeGreaterThan(0);
         });
 
@@ -44,12 +44,7 @@ $(function() {
         it('ensures all URLs and Names are not empty', function() {
             for (var i = 0, len = allFeeds.length; i < len; i++) {
                 expect(allFeeds[i].url).toContain('http');
-                expect(allFeeds[i].url).toBeDefined();
-                expect(allFeeds[i].url).not.toBe(null);
                 expect(allFeeds[i].name).toBeDefined();
-                expect(allFeeds[i].name).not.toBe(null);
-                expect(allFeeds[i].name).toContain('');
-                expect(allFeeds[i]).toBeTruthy();
             }
         });
     });
@@ -95,7 +90,7 @@ $(function() {
 
         beforeEach(function(done) {
             loadFeed(0, done);
-        });
+        }, 1000);
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -104,12 +99,13 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
          // several tests for checking the presence of entries in feed
-         it("ensures .entry element in .feed container after asynch load", function() {
+         it("ensures .entry element in .feed container after asynch load", function(done) {
              expect($('.feed .entry-link .entry').length).toBeGreaterThan(0);
              expect($('.feed').length).toBe(1);
              expect($('.feed').find('.entry').length).toBeGreaterThan(0);
              expect($('.feed .entry').length).toBeGreaterThan(0);
              expect($('.entry').length).toBeGreaterThan(0);
+             done();
          });
     });
 
@@ -125,7 +121,6 @@ $(function() {
             var firstFeed;
             var secondFeed;
             var thirdFeed;
-            var fourthFeed;
 
             beforeEach(function(done) {
                 loadFeed(0, function() {
@@ -134,29 +129,22 @@ $(function() {
                 loadFeed(1, function() {
                     secondFeed = $('.entry').find("h2")[0].innerText;
                     done();
-                });
-                loadFeed(2, function() {
-                    thirdFeed = $('.entry').find("h2")[0].innerText;
-                });
-                loadFeed(3, function() {
-                    fourthFeed = $('.entry').find("h2")[0].innerText;
                 })
          });
             // another fun console.log practice is to call loadFeed with params 
             // after calling Feed variables. 
             // JavaScript in action!!
-         it("ensures content changes", function() {
+         it("ensures content changes", function(done) {
             expect(firstFeed).not.toEqual(secondFeed);
             expect(secondFeed).not.toEqual(thirdFeed);
-            expect(secondFeed).not.toEqual(fourthFeed);
-            expect(firstFeed).not.toEqual(fourthFeed);
+            done();
          });
 
          afterAll(function(done) {
             loadFeed(0, done);
-         });
+         }, 1000);
 
-            }); 
+        }); 
         // if next and previous buttons (Arrows) were incorporated this would ensure
         // that the buttons are responsive and article entries change
         describe("New Feed Screen", function() {
@@ -175,16 +163,17 @@ $(function() {
                 });
             });
 
-            it("changes articles displayed in feed", function() {
+            it("changes articles displayed in feed", function(done) {
                 nextArrow.click();
                  expect(feedPage2).toEqual($('.entry').find("h2")[0].innerText);
 
                 previousArrow.click();
                  expect(feedPage).toBe($('.entry').find("h2")[0].innerText);
+                 done();
             });
 
             afterAll(function(done) {
                 loadFeed(0, done);
-            });
+            }, 1000);
         });
 }());
