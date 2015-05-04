@@ -1,3 +1,11 @@
+# A Word From JP Miller
+
+Using Jasmine for test-driven programming was very rewarding. Jasmine helps create code that is robust, hard to break and most likely to provide a consistent UX every time.
+
+I used the Udacity forums, an excelent Jasmine video tutorial series called JavaScript testing with Jasmine video tutorials by Javavideotutorials, the jasmine documentation and referenced jordan23jy's udacity-jasmine github repository in my pursuit to complete this project. 
+
+At the end of feedreader.js I created a hypothetical test for next and previous buttons that would allow a user to cycle through the loadFeed pages. The hypothetical test compares the first entry on the first two loadFeed pages to each other to ensure that the next and previous buttons do work.
+
 # Project Overview
 
 In this project you are given a web-based application that reads RSS feeds. The original developer of this application clearly saw the value in testing, they've already included [Jasmine](http://jasmine.github.io/) and even started writing their first test suite! Unfortunately, they decided to move on to start their own company and we're now left with an application with an incomplete test suite. That's where you come in.
