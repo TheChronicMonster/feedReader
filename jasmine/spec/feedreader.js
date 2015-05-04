@@ -162,20 +162,25 @@ $(function() {
         describe("New Feed Screen", function() {
             var nextArrow = $('.menu.icon.next');
             var previousArrow = $('.menu.icon.previous');
+            var feedPage;
+            var feedPage2;
 
             beforeEach(function(done) {
                 loadFeed(0, function() {
-                    this.loadFeed = $('.entry').find("h2")[0].innerText;
+                    feedPage = $('.entry').find("h2")[0].innerText;
+                });
+                loadFeed(1, function() {
+                    feedPage2 = $('.entry').find("h2")[0].innerText;
+                    done();
                 });
             });
 
             it("changes articles displayed in feed", function() {
                 nextArrow.click();
-                 expect($('this.loadFeed').toBeGreaterThan(loadFeed));
+                 expect(feedPage2).toEqual($('.entry').find("h2")[0].innerText);
 
-                 previousArrow.click();
-                  expect($('this.loadFeed').toBeLessThan(loadFeed));
-
+                previousArrow.click();
+                 expect(feedPage).toBe($('.entry').find("h2")[0].innerText);
             });
 
             afterAll(function(done) {
