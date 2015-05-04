@@ -50,7 +50,7 @@ $(function() {
                 expect(allFeeds[i].name).not.toBe(null);
                 expect(allFeeds[i].name).toContain('');
                 expect(allFeeds[i]).toBeTruthy();
-            };
+            }
         });
     });
 
@@ -94,7 +94,7 @@ $(function() {
     describe("Initial Entries", function() {
 
         beforeEach(function(done) {
-            loadFeed(0, done)
+            loadFeed(0, done);
         });
 
         /* TODO: Write a test that ensures when the loadFeed
