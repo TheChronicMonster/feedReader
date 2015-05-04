@@ -8,7 +8,7 @@ At the end of feedreader.js I created a hypothetical test for next and previous 
 
 #Running Instructions
 
-To run this repository fork the master or clone to your desktop. Open index.html in the web browser of your choice to view the specifications and expectations. To view the test-driven source code that I created open jasmine/spec/feedreader.js.
+To run this repository fork the master or clone to your desktop. Open index.html in the web browser of your choice to view the specifications and expectations. If the page does not seem to load properly on your browser then try using Google Chrome. To view the test-driven source code that I created open jasmine/spec/feedreader.js.
 
 # Project Overview
 
