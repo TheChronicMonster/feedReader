@@ -6,6 +6,10 @@ I used the Udacity forums, an excelent Jasmine video tutorial series called Java
 
 At the end of feedreader.js I created a hypothetical test for next and previous buttons that would allow a user to cycle through the loadFeed pages. The hypothetical test compares the first entry on the first two loadFeed pages to each other to ensure that the next and previous buttons do work.
 
+#Running Instructions
+
+To run this repository fork the master or clone to your desktop. Open index.html in the web browser of your choice to view the specifications and expectations. To view the test-driven source code that I created open jasmine/spec/feedreader.js.
+
 # Project Overview
 
 In this project you are given a web-based application that reads RSS feeds. The original developer of this application clearly saw the value in testing, they've already included [Jasmine](http://jasmine.github.io/) and even started writing their first test suite! Unfortunately, they decided to move on to start their own company and we're now left with an application with an incomplete test suite. That's where you come in.
