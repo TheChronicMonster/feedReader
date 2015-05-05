@@ -71,10 +71,7 @@ $(function() {
         // several tests for checking the presence of entries in feed
         it("ensures .entry element in .feed container after asynch load", function(done) {
             expect($('.feed .entry-link .entry').length).toBeGreaterThan(0);
-            expect($('.feed').length).toBe(1);
             expect($('.feed').find('.entry').length).toBeGreaterThan(0);
-            expect($('.feed .entry').length).toBeGreaterThan(0);
-            expect($('.entry').length).toBeGreaterThan(0);
             done();
         });
     });
